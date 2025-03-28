@@ -1,0 +1,57 @@
+Assignment operator: <- or = are used to assign values to variables. For example, x 
+<- 3 assigns the value 3 to the variable x. 
+• Comparison operators: == (equal to), != (not equal to), < (less than), > (greater 
+than), <= (less than or equal to), and >= (greater than or equal to) are used to 
+compare values. For example, x == 3 returns TRUE if x is equal to 3. 
+• Logical operators: & (and), | (or), and ! (not) are used to combine logical 
+expressions. For example, x > 3 & y < 5 returns TRUE if both x is greater than 3 and y 
+is less than 5. 
+• Arithmetic operators: + (addition), - (subtraction), * (multiplication), / (division), 
+and ^ (exponentiation) are used for basic arithmetic operations. 
+• Modulus operator: %% returns the remainder of a division. For example, 5 %% 2 
+returns 1, since 5 divided by 2 leaves a remainder of 1. 
+• %in% operator: checks if an element is present in a vector. For example, “a” %in% 
+c(“a”, “b”, “c”) returns TRUE, since “a” is present in the vector c(“a”, “b”, “c”). 
+• Pipe operator: %>% is used in the tidyverse packages for chaining functions 
+together. For example, df %>% filter(x > 3) %>% select(y) applies the filter() 
+function to the df data frame to keep only rows where x is greater than 3, and then 
+applies the select() function to keep only the y column. 
+• Colon operator ‘:’ creates a sequence of numbers. For example, 1:5 creates a vector 
+containing the numbers 1 through 5.
+
+%in%
+# Define two vectors 
+x <- c(1, 3, 5, 7) 
+y <- c(2, 4, 6, 8) 
+ 
+# Check which elements of x are in y 
+x %in% y 
+## [1] FALSE FALSE FALSE FALSE 
+
+%>%
+# Load the dplyr package 
+library(dplyr) 
+##  
+## Attaching package: 'dplyr' 
+## The following objects are masked from 'package:stats': 
+##  
+##     filter, lag 
+## The following objects are masked from 'package:base': 
+##  
+##     intersect, setdiff, setequal, union 
+# Select the columns "mpg" and "cyl" from the mtcars dataset,  
+# filter for cars with 6 cylinders or more,  
+# sort the results by mpg in descending order, 
+# and select the top 3 rows 
+top_cars <- mtcars %>% 
+  select(mpg, cyl) %>% 
+  filter(cyl >= 6) %>% 
+  arrange(desc(mpg)) %>% 
+  head(3) 
+ 
+# Print the top_cars dataframe 
+top_cars 
+##                 mpg cyl 
+## Hornet 4 Drive 21.4   6 
+## Mazda RX4      21.0   6 
+## Mazda RX4 Wag  21.0   6
