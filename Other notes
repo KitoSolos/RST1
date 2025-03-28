@@ -1,2 +1,34 @@
 remove all assigned variables
 rm(list=ls())
+
+- An R ‘list’ is an object
+ consisting of an ordered collection of objects
+ known as its components.- Components can be numbers, vectors, matrices, characters etc. No specific type. 
+Lst = list(name="Fred", wife="Mary", no.children=3, child.ages=c(4,7,9))
+ Lst
+ Lst[[1]]
+ Lst[[4]][1]
+ # To print a component in a ‘list’, we use double box bracket [[ ]].
+ # If that component is a vector and we want extract one specific value from that vector, we 
+use [ ] after the [[ ]].
+
+ length(Lst) gives the number of (top level) components the list has.
+ The component may be referred to by giving the component name:
+ Lst$name
+ Lst$wife
+
+A data frame is a table or a two-dimensional array-like structure.
+ Vector structures appearing as variables of the data frame must all have the same 
+length. 
+Matrix structures must all have the same row size.
+ # Create the data frame.
+ emp.data = data.frame(
+ emp_id = c (1:5), 
+emp_name = c("Rick","Dan","Michelle","Ryan","Gary"),
+ salary = c(623.3,515.2,611.0,729.0,843.25),   
+start_date = as.Date(c("2012-01-01", "2013-09-23", "2014-11-15", "2014-05-11",
+ "2015-03-27")),
+ stringsAsFactors = FALSE
+ )
+ # Print the data frame.   
+emp.data
