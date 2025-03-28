@@ -1,0 +1,98 @@
+---
+title: "Assignment2_2026333191"
+output:
+  word_document: default
+  html_document:
+    df_print: paged
+date: "2025-03-21"
+---
+
+## Question 1:
+
+```{r}
+Amat = matrix(c(2,-1,3,4,3,2,-5,5,1,4,2,3), nrow = 3, byrow = T)
+print(Amat)
+coeff = Amat[,1:3]
+const = Amat[,4]
+solve(coeff,const)
+```
+
+Therefore X1 = 1.8314607 , X2 = 0.2022472, X3 = 0.1797753
+
+In Reduced Row Echelon Form:
+```{r}
+library(pracma)
+rref(Amat)
+```
+
+## Question 2:
+
+```{r}
+x1 = runif(1000,0,1)
+m1 = mean(x1)
+print(m1)
+
+x2 = runif(100000,0,1)
+m2 = mean(x2)
+print(m2)
+
+x3 = runif(500000,0,1)
+m3 = mean(x3)
+print(m3)
+```
+ 
+Determining each means deviation from 0.5:
+
+  -deviation from mean of sample x1:
+```{r}
+d1 = m1-0.5
+d1 = abs(d1)
+print(d1)
+```
+  - deviation from mean of sample x2:
+```{r}
+d2 = m2-0.5
+d2 = abs(d2)
+print(d2)
+```
+  - deviation from mean of sample x3:
+```{r}
+d3 = m3-0.5
+d3 = abs(d3)
+print(d3)
+```
+
+As you can see the deviation from the mean is lowest when the sample size is the highest. Sample x1 has the largest deviation and sample x3 has the smallest deviation. This can be explained by the law of large numbers. Without getting too technical, we know by the law of large numbers that as the sample size(n) increases(n -> infinity) the expected value or mean of the sample will converge at the true mean of the distribution. We know in this case that the true mean is 0.5 and as you can see the deviation is smallest in the case of x3.
+
+## Question 3:
+
+Summary of all the data:
+```{r}
+library(datasets)
+data(airquality)
+summary(airquality)
+```
+
+Pairs plot of the data, Indicating the relationships between the variables:
+```{r}
+pairs(airquality)
+```
+
+Histogram showing windiness distribution:
+```{r}
+library(ggplot2)
+ggplot(airquality, aes( x = Wind)) + 
+  geom_histogram(aes(y = after_stat(density)), bins = 30, fill = "purple", colour = "black") +
+  geom_density() +
+  ggtitle("Windiness Distribution") + 
+  labs(x = "Wind", y = "Frequency")
+```
+
+Line plot of the relationship between Ozone and Temperature: 
+```{r warning = F}
+ggplot(airquality, aes(x = Ozone, y = Temp)) + 
+  geom_line(colour = "purple", linewidth = 0.75,) +
+  labs( x = "Ozone", y = "Temperature")
+```
+
+
