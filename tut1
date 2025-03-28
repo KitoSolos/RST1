@@ -1,0 +1,29 @@
+	data <- read.csv("C:/Users/Kito/OneDrive/Desktop/Uni books/SY/2022_Japan_CPI_GoodsAndServiceClassificationIndex.csv")
+	All_items <- data$All.items
+	max(All_items, na.rm = TRUE)
+	min(All_items, na.rm = TRUE)
+	median(All_items, na.rm = TRUE)
+	mean(All_items, na.rm = TRUE)
+ var(All_items, na.rm = TRUE)	quantile(All_items, 0.25, na.rm = TRUE)
+ quantile(All_items, 0.75, na.rm = TRUE)
+ IQR(All_items, na.rm = TRUE)
+
+In the first line of code, I imported a .csv data file. 
+This is a dataset of all the consumer price indices In Japan from 1970 to 2022. 
+In the second line of code, I assigned a subset of the data under the column in the table “All items” to the name “ALL_items.” 
+From the third line of code and onwards I used ‘R’ functions to calculate the maximum value, minimum value, median, mean, variance, the 25th percentile, 
+the 75th percentile and the Interquartile range of all the values under the “All items” column in the table.
+I used the argument “na.rm = TRUE” to remove or to not consider any null values in the table.
+
+
+	A = as.matrix(data[2:5, 2:5])
+	A
+	B = as.matrix(data[2:5,48:51])
+	B
+	C = A%*%B
+	C
+ 	C[3,4]
+In line 3 I used the ‘as.matrix’ function to create a matrix of the values in the .csv file from comprised of all the values from row 2 to 5 and column 2 to 5 and assigned it to the matrix name ‘A’. 
+In the next line I printed the matrix ‘A.’ I did the same with matrix B in the next line, creating a matrix from value in row 2 to 5 and columns 48 to 51. 
+In the following line I printed matrix ‘B.’ I then used the ‘%*%’ operation to multiply matrices ‘A’ and ‘B’ and then assigned the resultant matrix to the matrix name ‘C.’ 
+I then printed the matrix ‘C’ in the next line. I then a function that returns the value of the element in row 3 column 4 of matrix ‘C.’
