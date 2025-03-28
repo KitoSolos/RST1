@@ -1,0 +1,251 @@
+if using e.g airquaility r dataset save a column by
+data.ozone = airquality$O.zone (data$column)
+
+THEMES
+library(hrbrthemes)
+
+BUILDING GGPLOT
+#ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +  <GEOM_FUNCTION>()
+ • #use the ggplot() function and bind the plot to a specific data 
+frame using the data argument
+ • ggplot(data = airquality)
+ • Define a  mapping using aes() function, by selecting variables and specifying 
+how to present them in the graph.
+ • Add 'geoms’ – this function decides the graphical representations of the data 
+in the plot (points, lines, bars). 
+• To add a geom to the plot use ‘+’ operator.
+ • Let's use geom_point() first to create a scatter plot.
+
+CONNECTED SCATTER PLOT WITH SOME UPRGRADES
+ ggplot( iris, aes(x=Sepal.Length, 
+y=Sepal.Width)) +
+ geom_line( color="blue") +
+ geom_point(shape=21, color="black", 
+fill="red", size=5) +
+ theme_ipsum() +
+ ggtitle("Sepal length vs. Sepal width")
+SCATTER WITH UPGRADES
+ggplot(data = airquality, mapping = 
+aes(x = Ozone, y = Temp))+
+ •  geom_point(alpha=0.5,shape=21, 
+color="black", fill="red", size=5) +
+ theme_ipsum() +  ggtitle("Ave. ozone 
+density vs. temperature")
+SCATTER PLOT WITH CLASSES SEPARATED BY COLOUR
+ggplot(data = mpg) + 
+geom_point(mapping = aes(x = displ, y = 
+hwy, color = class))
+SCATTER SEPARATED BY SIZE
+ggplot(data = mpg) + 
+geom_point(mapping = aes(x = displ, y = 
+hwy, size = class))
+CAN DO SHAPE AND APLHA TOO
+SCATTER SEPARATED INTO SEPARATED SCATTER PLOTS BY CLASS/ MANUFACTURER
+ggplot(data = mpg) + 
+geom_point(mapping = aes(x = displ, y = 
+hwy)) + 
+facet_wrap(~ class, nrow = 2)
+FACET SCATTER ON COMB OF 2 VARIABLES
+ggplot(data = mpg) + 
+geom_point(mapping = aes(x = displ, y = 
+hwy)) + 
+facet_grid(drv ~ cyl)
+FACET LONG RECTANGLES
+ ggplot(data = mpg) + 
+geom_point(mapping = aes(x = 
+displ, y = hwy)) + 
+facet_grid(. ~ cyl)
+FACET WIDE RECTANGLES
+ggplot(data = mpg) + 
+geom_point(mapping = aes(x = 
+displ, y = hwy)) + 
+facet_grid(drv ~ .)
+
+
+HISTOGRAM AND UPGRADES
+ggplot(mpg, aes(x = hwy)) + 
+  geom_histogram(aes(y = ..density..), fill = "blue", color = "white") + 
+  geom_density()+ 
+  ggtitle("Highway MPG Distribution") + 
+  labs(x = "Highway MPG", y = "Frequency")+ 
+  theme_classic()
+HISTOGRAMS SEPARATED BY CLASS/MANUFACTURER
+ggplot(data = mpg) + 
+geom_histogram(mapping = aes(x = displ)) 
++ 
+facet_wrap(~ manufacturer, nrow = 3)
+
+BAR CHART
+ggplot(data = diamonds) + 
+geom_bar(mapping = aes(x = 
+cut))
+ADD FILLS TO COLOUR SEPARATE
+ggplot(data = diamonds) + 
+geom_bar(mapping = aes(x = cut, fill = cut))
+STACKED BAR FOR ANOTHER VARIABLE SEPARATION
+ggplot(data = diamonds) + 
+geom_bar(mapping = aes(x = cut, fill = 
+clarity))
+SEPARATE BARCHARTS BY STACKED VARIABLE
+ggplot(data = diamonds) + 
+geom_bar(mapping = aes(x = cut, fill = 
+clarity), position = "dodge")
+
+
+NOTCHED BOX PLOT
+ggplot(ToothGrowth, aes(x=dose, 
+y=len)) + 
+•  geom_boxplot(notch=TRUE)
+BOX PLOT WITH OUTLIER AND OUTLIER UPGRADES
+ggplot(ToothGrowth, aes(x=dose, 
+y=len)) + 
+geom_boxplot(outlier.colour="red", 
+outlier.shape=11,               
+outlier.size=9)
+
+LINE PLOT
+SMOOTH LINE
+ggplot(data = mpg) + 
+geom_smooth(mapping = aes(x 
+= displ, y = hwy))
+SMOOTH LINE AND SEPARATED BY ANOTHER VARIABLE (DRV)
+ggplot(data = mpg) + 
+geom_smooth(mapping = aes(x 
+= displ, y = hwy, linetype = drv))
+MAKE COLOUR = drv if you want colour separation
+CAN ALSO APPLY FACET WRAP
+
+MULTI LINE PLOT
+library(ggplot2) 
+data <- data.frame( 
+time = c(1, 2, 3, 4, 5), 
+group1 = c(5, 7, 6, 8, 9), 
+group2 = c(3, 4, 5, 7, 8), 
+group3 = c(2, 3, 5, 6, 7) 
+) 
+data 
+##   time group1 group2 group3 
+## 1    1      5      3      2 
+## 2    2      7      4      3 
+## 3    3      6      5      5 
+## 4    4      8      7      6 
+## 5    5      9      8      7 
+
+create:
+ggplot(data, aes(x = time)) + 
+geom_line(aes(y = group1), color = "red") + 
+geom_line(aes(y = group2), color = "blue") + 
+geom_line(aes(y = group3), color = "green") + 
+labs(x = "Time", y = "Value", title = "Multiple line plot")
+customize:
+# Add points and error bars to the plot 
+ggplot(data, aes(x = time, y = group1)) + 
+geom_line(color = "red") + 
+geom_point(aes(y = group1), color = "red") + 
+geom_errorbar(aes(ymin = group1 - 1, ymax = group1 + 1), width = 0.2, color 
+= "red") + 
+geom_line(aes(y = group2), color = "blue") + 
+geom_point(aes(y = group2), color = "blue") + 
+geom_errorbar(aes(ymin = group2 - 1, ymax = group2 + 1), width = 0.2, color 
+= "blue") + 
+geom_line(aes(y = group3), color = "green") + 
+geom_point(aes(y = group3), color = "green") + 
+geom_errorbar(aes(ymin = group3 - 1, ymax = group3 + 1), width = 0.2, color 
+= "green") + 
+labs(x = "Time", y = "Value", title = "Multiple line plot with points and 
+error bars") 
+
+CORROLATION PLOT
+library(GGally)
+ data1 = 
+data.frame(mtcars$mpg,mtcars$hp,
+ mtcars$wt)
+ ggpairs(data1)
+
+
+ANNOTATE PLOTS
+ ggplot(data, aes(x=wt, y=mpg)) +
+ geom_point() + 
+geom_label( 
+data=data %>% filter(mpg>20 
+& wt>3), 
+aes(label=carName))
+LABELS AS VECTOR
+ ggplot(data, aes(x=wt, y=mpg)) +
+ geom_point() + 
+geom_label( 
+data= filter(mtcars,mpg>20 & 
+wt>3), aes(label = 
+c("Merc230D","Merc240","Hornet 
+4"))
+ )
+REPEL LABELS SO NOT TO OVERLAP
+declarations :
+library(ggrepel)
+ dat = subset(mtcars, wt > 2.75 & wt < 3.45)
+ dat$car = rownames(dat)  ## store the row names to a 
+variable
+ p = ggplot(dat, aes(wt, mpg, label = car)) +  
+geom_point(color = "red")
+codes:
+NON SURR
+ p2 = p + geom_text_repel() + 
+labs(title = "geom_text_repel()")
+SURR
+ p2 = p + geom_label_repel() + 
+labs(title = "geom_label_repel()") 
+
+CREATE AND PLOT
+# create data
+ xValue = c(1:10)
+ yValue = cumsum(rnorm(10)) ## returns 
+cumulative sum of random samples
+ data = data.frame(xValue,yValue)
+ # Plot
+ p = ggplot(data, aes(x=xValue, y=yValue)) +
+ geom_line()
+
+SPECIAL THINGY 3 LINE PLOTS FOR ASHLEY ETC...
+ # Multigroup line chart # Libraries
+ library(ggplot2)
+ library(babynames) # provide the dataset: a dataframe called babynames
+ library(dplyr)
+ # Keep only 3 names
+ str(babynames)
+ don = babynames %>% 
+filter(name %in% c("Ashley", "Patricia", "Helen")) %>%
+ filter(sex=="F")
+ggplot(don, aes(x=year, y=n, 
+group=name, color=name)) +
+ geom_line()
+STOCK MARKET
+nmonths = 24 
+x = seq(1,24,1)
+ var1 = data.frame(
+ x,
+ Percent.Change = 25 + runif(nmonths,1,100)
+ )
+ var2 = data.frame(
+ x,
+ Percent.Change = 75 + runif(nmonths,1,50)
+ )
+cols = c("unit", "Stockmarket value")
+ colnames(var1) = cols
+ colnames(var2) = cols
+ var1
+ var2
+ p = ggplot() + geom_line(data = 
+var1, aes(x = x, y = 
+Stockmarket.value), color = 
+"blue")+xlab('Units') 
++ylab('percent.change')
+ p1 = p+geom_line(data = var2, 
+aes(x = x, y = Stockmarket.value), 
+color = "red") +
+ xlab('Units') +
+ ylab('percent.change')
+
+
+
+
+
